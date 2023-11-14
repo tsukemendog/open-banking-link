@@ -14,7 +14,7 @@ public class TestFilter extends OncePerRequestFilter {
 
         System.out.println("Once 필터");
         if (tenantId != null) {
-            return;
+            filterChain.doFilter(request, response);;
         }
         throw new AccessDeniedException("Access denied");
     }

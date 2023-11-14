@@ -24,7 +24,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authorize) -> authorize
+                .authorizeHttpRequests((authorize) -> authorize.mvcMatchers("/ttt").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(new TestFilter(), AuthorizationFilter.class);
         return http.build();
