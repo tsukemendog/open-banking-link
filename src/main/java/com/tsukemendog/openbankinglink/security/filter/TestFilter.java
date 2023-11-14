@@ -10,12 +10,7 @@ import java.io.IOException;
 public class TestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String tenantId = request.getParameter("testId");
-
-        System.out.println("Once 필터");
-        if (tenantId != null) {
-            filterChain.doFilter(request, response);;
-        }
-        throw new AccessDeniedException("Access denied");
+        filterChain.doFilter(request, response);;
+        //throw new AccessDeniedException("Access denied");
     }
 }
