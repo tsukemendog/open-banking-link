@@ -17,7 +17,7 @@ public class TestControllerTest {
     @BeforeEach
     void setup() { //text/html;charset=UTF-8
         this.mockMvc = MockMvcBuilders.standaloneSetup(new TestController())
-                .defaultRequest(get("/ttt").accept(MediaType.TEXT_HTML).param("testId","ㅋㅋㅋ"))
+                .defaultRequest(get("/").accept(MediaType.TEXT_HTML).param("testId","ㅋㅋㅋ"))
                 .alwaysExpect(status().isOk())
                 .build();
     }
