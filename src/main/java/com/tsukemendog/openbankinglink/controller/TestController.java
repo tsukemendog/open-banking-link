@@ -4,6 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +19,8 @@ public class TestController {
                 "www",  HttpStatus.OK);
     }
 
-    @GetMapping("/ttt")
-    public ResponseEntity<String> test(@RequestParam String testId) {
+    @GetMapping("/ttt/{testId}")
+    public ResponseEntity<String> test(@PathVariable String testId) {
         System.out.println("testId : " + testId);
         if ("no".equals(testId)) {
             return new ResponseEntity<>("Error", HttpStatus.BAD_GATEWAY);

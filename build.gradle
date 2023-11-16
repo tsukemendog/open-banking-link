@@ -53,3 +53,11 @@ tasks.named('asciidoctor') {
     inputs.dir snippetsDir
     dependsOn test
 }
+
+
+bootJar {
+    dependsOn asciidoctor // (3)
+    from ("./build/asciidoc/html5/") { // (4)
+        into 'static/docs'
+    }
+}
