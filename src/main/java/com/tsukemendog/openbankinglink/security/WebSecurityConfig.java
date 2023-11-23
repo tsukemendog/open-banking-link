@@ -25,6 +25,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize.mvcMatchers("/**").permitAll()) //.authenticate() 로 변경
+                .formLogin().disable()
+                .httpBasic().disable()
                 .addFilterBefore(new TestFilter(), AuthorizationFilter.class);
         return http.build();
     }

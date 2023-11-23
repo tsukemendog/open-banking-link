@@ -44,9 +44,15 @@ tasks.named('bootBuildImage') {
     builder = 'paketobuildpacks/builder-jammy-base:latest'
 }
 
+tasks.register('copyDocument', Copy) {
+    dependsOn asciidoctor
+    from file("build/docs/asciidoc")
+    into file("src/main/resources/static/docs")
+}
+
 tasks.named('test') {
-    outputs.dir snippetsDir
     useJUnitPlatform()
+    outputs.dir snippetsDir
 }
 
 tasks.named('asciidoctor') {
@@ -54,10 +60,22 @@ tasks.named('asciidoctor') {
     dependsOn test
 }
 
+tasks.named('asciidoctor').get().doFirst {
+    delete file('src/main/resources/static/docs')
+}
+
+asciidoctor.doFirst {
+    delete file('src/main/resources/static/docs')
+}
 
 bootJar {
     dependsOn asciidoctor // (3)
-    from ("./build/asciidoc/html5/") { // (4)
-        into 'static/docs'
+    copy {
+        from "${asciidoctor.outputDir}"
+        into 'BOOT-INF/classes/static/docs'
     }
+}
+
+build {
+    dependsOn copyDocument
 }

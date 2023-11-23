@@ -1,33 +1,21 @@
 package com.tsukemendog.openbankinglink.controller;
 
+import com.tsukemendog.openbankinglink.dto.TestDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.Map;
 
 @RestController
 public class TestController {
 
-    @GetMapping("/tt")
-    public ResponseEntity<String> test1(@RequestParam String testId) {
-        System.out.println("id : " + testId);
+    @GetMapping("/test")
+    public Map<String, Object> greeting(@RequestParam("testID") String testId, @RequestBody TestDto testDto) {
 
-        return new ResponseEntity<>(
-                "www",  HttpStatus.OK);
-    }
-
-    @GetMapping("/ttt/{testId}")
-    public ResponseEntity<String> test(@PathVariable String testId) {
-        System.out.println("testId : " + testId);
-        if ("no".equals(testId)) {
-            return new ResponseEntity<>("Error", HttpStatus.BAD_GATEWAY);
-        }
-
-        return new ResponseEntity<>(
-                "Custom header set",  HttpStatus.OK);
+        return Collections.singletonMap("message", testDto.getKey1() + " " + testDto.getKey2());
     }
 
 

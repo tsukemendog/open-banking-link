@@ -8,7 +8,7 @@ public interface ApiDocumentUtils {
         return preprocessRequest(
                 modifyUris() // (1)
                         .scheme("http")
-                        .host("docs.api-skyclass.com")
+                        .host("docs.api-skyclassism.com")
                         .removePort(),
                 prettyPrint()); // (2)
     }
